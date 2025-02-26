@@ -6,7 +6,7 @@ import unicodedata
 import httpx
 import json
 
-# python -m venv myenv
+# python -m venv venv
 # source venv/bin/activate
 
 app = Flask(__name__)
