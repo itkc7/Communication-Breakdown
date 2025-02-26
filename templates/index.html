@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Translator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left column for translation boxes -->
+        <div class="translation-column">
+            <h1>Communication Breakdown</h1>
+            <textarea id="input-text" placeholder="Enter Japanese text here..."></textarea>
+            <button id="translate-btn">Translate</button>
+            <h2>Translation</h2>
+            <textarea id="translation-output" readonly></textarea>
+        </div>
+
+        <!-- Right column for breakdown box -->
+        <div class="breakdown-column">
+            <h2>Linguistic Breakdown</h2>
+            <div id="breakdown-output"></div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
