@@ -53,6 +53,7 @@ custom_definitions = {
 }
 
 
+
 # Function to get English definition using Jisho API or custom definitions
 
 
@@ -91,18 +92,7 @@ def kanji_to_hiragana(text):
 def home():
     return render_template('index.html')
 
-
 # Route to handle translation and linguistic breakdown
-# Define a list of Japanese particles
-japanese_particles = ["は", "を", "が", "に", "で","と", "も", "から", "まで", "の", "や", "か", "ね", "よ"]
-
-# Modify the get_english_definition function or add a new function to handle particles
-
-
-def get_pos_for_token(token):
-    if token.text in japanese_particles:
-        return "Particle"
-    return pos_mapping.get(token.pos_, "UNKNOWN")
 
 
 @app.route('/translate', methods=['POST'])
@@ -116,7 +106,7 @@ def translate():
         "target_lang": "EN"
     }
     post_data = json.dumps(translation_data)
-
+    
     try:
         response = httpx.post(url=deeplx_api, data=post_data)
         response_json = response.json()
@@ -142,7 +132,7 @@ def translate():
     breakdown = []
     for token in doc:
         lemma = token.lemma_
-        pos_english = get_pos_for_token(token)  # Use the new function
+        pos_english = pos_mapping.get(token.pos_, "UNKNOWN")
         token_hiragana = kanji_to_hiragana(token.text)
         lemma_hiragana = kanji_to_hiragana(lemma)
         if token.pos_ != "PUNCT":
@@ -154,7 +144,12 @@ def translate():
                 "lemma": lemma_display,
                 "pos": pos_english,
                 "definition": definition
-        })
+            })
+
+    return jsonify({
+        "translation": translation_text,
+        "breakdown": breakdown
+    })
 
 
 if __name__ == '__main__':
