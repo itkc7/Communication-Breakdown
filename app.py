@@ -8,8 +8,9 @@ import json
 
 app = Flask(__name__)
 
-deeplx_api = "http://127.0.0.1:1188/v2/translate" # pro endpoint
+# deeplx_api = "http://127.0.0.1:1188/v2/translate" # pro endpoint
 
+deeplx_api = "http://127.0.0.1:1188/translate"  # mobile endpoint
 
 # Load SpaCy Japanese model
 nlp = spacy.load("ja_core_news_sm")
@@ -91,11 +92,18 @@ def translate():
     data = request.json
     sentence = data.get('sentence', '')
 
-    # Translate the sentence using DeepLX API PRO ENDPOINT
+    # # Translate the sentence using DeepLX API PRO ENDPOINT
+    # translation_data = {
+    #     "text": [sentence],
+    #     "target_lang": "EN",
+    #     "source_lang": "JA"
+    # }
+
+    # Translate the sentence using DeepLX API MOBILE ENDPOINT
     translation_data = {
-        "text": [sentence],
-        "target_lang": "EN",
-        "source_lang": "JA"
+	"text": "Hello World",
+	"source_lang": "EN",
+	"target_lang": "ZH"
     }
     
     
