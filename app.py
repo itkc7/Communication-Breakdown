@@ -6,21 +6,18 @@ import unicodedata
 import httpx
 import json
 
-# python -m venv venv
-# source venv/bin/activate
-
 app = Flask(__name__)
 
-deeplx_api = "http://127.0.0.1:1188/v2/translate"
+deeplx_api = "http://127.0.0.1:1188/v2/translate" # pro endpoint
 
 
 # Load SpaCy Japanese model
 nlp = spacy.load("ja_core_news_sm")
 
-# Initialize pykakasi for kanji to hiragana conversion
+# Initialize pykakasi for kanji hiraganization
 kks = pykakasi.kakasi()
 
-# Define a mapping from UD POS tags to English POS tags
+# Define a mapping from UPOS tags to English POS tags
 pos_mapping = {
     "NOUN": "Noun",
     "VERB": "Verb",
@@ -70,14 +67,11 @@ def get_english_definition(lemma, pos):
     return "No definition found"
 
 # Function to check if a character is hiragana
-
-
 def is_hiragana(char):
     return "HIRAGANA" in unicodedata.name(char, "")
 
+
 # Function to convert kanji to hiragana using pykakasi
-
-
 def kanji_to_hiragana(text):
     if all(is_hiragana(char) for char in text):
         return None
@@ -86,25 +80,25 @@ def kanji_to_hiragana(text):
     return hiragana
 
 # Route for the home page
-
-
 @app.route('/')
 def home():
     return render_template('index.html')
 
+
 # Route to handle translation and linguistic breakdown
-
-
 @app.route('/translate', methods=['POST'])
 def translate():
     data = request.json
     sentence = data.get('sentence', '')
 
-    # Translate the sentence using DeepLX API
+    # Translate the sentence using DeepLX API PRO ENDPOINT
     translation_data = {
         "text": [sentence],
-        "target_lang": "EN"
+        "target_lang": "EN",
+        "source_lang": "JA"
     }
+    
+    
     post_data = json.dumps(translation_data)
     
     try:
