@@ -1,5 +1,7 @@
 #!/bin/bash
 
+chmod +x build.sh
+
 #update homebrew
 brew update
 brew upgrade deeplx          
