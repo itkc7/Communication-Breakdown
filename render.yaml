@@ -1,6 +1,4 @@
 services:
   - type: web
-    name: deeplx
-    dockerfile: Dockerfile
-    port: 1188
-    
+    name: deeplx-api  # Your API service name
+    runtime: docker   # Use Docker
