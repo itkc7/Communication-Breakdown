@@ -1,4 +1,0 @@
-services:
-  - type: web
-    name: deeplx-api  # Your API service name
-    runtime: docker   # Use Docker
