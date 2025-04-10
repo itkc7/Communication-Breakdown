@@ -8,7 +8,10 @@ import json
 
 app = Flask(__name__)
 
-deeplx_api = "https://d8d0-136-142-159-111.ngrok-free.app/v2/translate"  # pro endpoint
+# deeplx_api = "https://d8d0-136-142-159-111.ngrok-free.app/v2/translate"  # pro endpoint + hosted
+
+deeplx_api = "http://127.0.0.1:1188/v2/translate" # pro endpoint + local
+
 
 # deeplx_api = "http://127.0.0.1:1188/translate"  # mobile endpoint
 
@@ -55,17 +58,50 @@ custom_definitions = {
 # Function to get English definition using Jisho API or custom definitions
 
 
+# def get_english_definition(lemma, pos):
+#     if lemma in custom_definitions:
+#         return custom_definitions[lemma]
+#     try:
+#         result = Word.request(lemma)
+#         if result and result.data:
+#             return result.data[0].senses[0].english_definitions[0]
+#     except Exception as e:
+#         if pos != "PUNCT":
+#             print(f"Error fetching definition for {lemma}: {e}")
+#     return "No definition found"
 def get_english_definition(lemma, pos):
     if lemma in custom_definitions:
         return custom_definitions[lemma]
+    
     try:
         result = Word.request(lemma)
-        if result and result.data:
-            return result.data[0].senses[0].english_definitions[0]
+        if not result or not result.data:
+            return "No definition found"
+            
+        # Build detailed output similar to terminal display
+        definitions = []
+        for entry in result.data:
+            # Add word and reading
+            word_info = f"{entry.slug} ({', '.join(entry.japanese[0].reading)})"
+            if entry.jlpt:
+                word_info += f" [JLPT: {entry.jlpt[0]}]"
+            definitions.append(word_info)
+            
+            # Add all senses
+            for i, sense in enumerate(entry.senses, 1):
+                sense_def = f"{i}. {', '.join(sense.english_definitions)}"
+                if sense.parts_of_speech:
+                    sense_def += f" ({', '.join(sense.parts_of_speech)})"
+                definitions.append(sense_def)
+            
+            definitions.append("─" * 80)  # Separator line
+            
+        return "\n".join(definitions)
+        
     except Exception as e:
         if pos != "PUNCT":
             print(f"Error fetching definition for {lemma}: {e}")
-    return "No definition found"
+        return "No definition found"
 
 # Function to check if a character is hiragana
 def is_hiragana(char):

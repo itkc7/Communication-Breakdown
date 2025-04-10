@@ -43,3 +43,23 @@ document.getElementById("translate-btn").addEventListener("click", async () => {
     alert("An error occurred while translating.");
   }
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const tryMeBtn = document.getElementById("try-me-btn");
+  const inputText = document.getElementById("input-text");
+  const translateBtn = document.getElementById("translate-btn");
+
+  const samplePhrases = [
+    "これはペンです。",
+    "昨日は雨が降りました。",
+    "東京に行きたいです。",
+    "猫が好きです。",
+    "すみません、英語を話せますか？",
+  ];
+
+  tryMeBtn.addEventListener("click", function () {
+    const randomPhrase =
+      samplePhrases[Math.floor(Math.random() * samplePhrases.length)];
+    inputText.value = randomPhrase;
+    translateBtn.click();
+  });
+});
