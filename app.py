@@ -170,7 +170,7 @@ def translate():
     except Exception as e:
         # Handle any exceptions that occur during the API request
         print(f"Error during translation: {e}")
-        translation_text = "Translation failed: Error contacting the API."
+        translation_text = "Translation failed: Please yell at me to fix container."
 
     # Process the sentence for linguistic breakdown
     doc = nlp(sentence)
