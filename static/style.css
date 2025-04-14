@@ -1,100 +1,147 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-    min-height: 100vh;
-    overflow-y: auto;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    gap: 40px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
 }
 
 .translation-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-width: 10px; 
-    gap: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 10px;
+  gap: 10px;
 }
 
 .breakdown-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    margin-top: 86px;
-    min-width: 0; 
-    height: 100%; 
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 86px;
+  min-width: 0;
+  height: 100%;
 }
 
 #breakdown-output {
-    flex-grow: 1;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    overflow-x: hidden; 
-    min-height: 100px;
-    max-height: 400px;
+  flex-grow: 1;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  overflow-x: hidden;
+  min-height: 100px;
+  max-height: 400px;
 }
 
-
-h1, h2{
-    margin-bottom: 10px;
+h1,
+h2 {
+  margin-bottom: 10px;
 }
 
 textarea {
-    width: 100%;
-    height: 100px;
-    margin-top: -20px;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    resize: none;
+  width: 100%;
+  height: 100px;
+  margin-top: -20px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  resize: none;
 }
 
 button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 #translate-btn {
-    width: 100px;
+  width: 100px;
 }
 
 button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .breakdown-header {
   display: flex;
   align-items: center;
-  gap: 15px; 
+  gap: 15px;
   /* margin-bottom: 10px; */
 }
 
 #breakdown-type {
-    margin-top: 15px;
-    margin-left: 25px;
+  margin-top: 15px;
+  margin-left: 25px;
 }
 
 #try-me-btn {
-    font-size: 0.8em;
-    padding: 6px 12px;
-    margin-left: 10px;
+  font-size: 0.8em;
+  padding: 6px 12px;
+  margin-left: 10px;
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -100px;
+  
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -10px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
