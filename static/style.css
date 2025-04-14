@@ -16,14 +16,14 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    gap: 40px; /* Increased gap for more space between columns */
+    gap: 40px;
 }
 
 .translation-column {
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-width: 0; /* Important to prevent squishing */
+    min-width: 10px; 
     gap: 10px;
 }
 
@@ -31,8 +31,9 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-width: 0; /* Important to prevent squishing */
-    height: 100%; /* give it height context */
+    margin-top: 86px;
+    min-width: 0; 
+    height: 100%; 
 }
 
 #breakdown-output {
@@ -42,19 +43,20 @@ body {
     padding: 10px;
     border-radius: 4px;
     background-color: #f9f9f9;
-    overflow-x: hidden; /* Prevent horizontal overflow */
+    overflow-x: hidden; 
     min-height: 100px;
-    max-height: 300px; /* adjust as needed */
+    max-height: 400px;
 }
 
 
-h1, h2 {
+h1, h2{
     margin-bottom: 10px;
 }
 
 textarea {
     width: 100%;
     height: 100px;
+    margin-top: -20px;
     padding: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
@@ -71,8 +73,24 @@ button {
     margin-bottom: 10px;
 }
 
+#translate-btn {
+    width: 100px;
+}
+
 button:hover {
     background-color: #0056b3;
+}
+
+.breakdown-header {
+  display: flex;
+  align-items: center;
+  gap: 15px; 
+  /* margin-bottom: 10px; */
+}
+
+#breakdown-type {
+    margin-top: 15px;
+    margin-left: 25px;
 }
 
 #try-me-btn {

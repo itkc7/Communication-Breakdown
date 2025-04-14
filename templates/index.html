@@ -16,10 +16,13 @@
       <div class="translation-column">
         <h1 style="display: flex; align-items: center; gap: 10px">
           Communication Breakdown
+        </h1>
+        <h2>
+          Target Text
           <button id="try-me-btn" style="font-size: 0.8em; padding: 6px 12px">
             Try Me!
           </button>
-        </h1>
+        </h2>
 
         <textarea
           id="input-text"
@@ -30,9 +33,19 @@
         <textarea id="translation-output" readonly></textarea>
       </div>
 
-      <!-- Right column for breakdown box -->
       <div class="breakdown-column">
-        <h2>Linguistic Breakdown</h2>
+        <div class="breakdown-header">
+          <h2>Linguistic Breakdown</h2>
+          <label class="checkbox-label" for="breakdown-type">
+            <input
+              type="checkbox"
+              id="breakdown-type"
+              name="breakdown-type"
+              value="toggled"
+            />
+            Toggle extended breakdown
+          </label>
+        </div>
         <div id="breakdown-output"></div>
       </div>
     </div>

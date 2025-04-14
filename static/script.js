@@ -6,12 +6,17 @@ document.getElementById("translate-btn").addEventListener("click", async () => {
   }
 
   try {
+    const extendedBreakdown = document.getElementById("breakdown-type").checked;
+
     const response = await fetch("/translate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ sentence: inputText }),
+      body: JSON.stringify({
+        sentence: inputText,
+        extended: extendedBreakdown, // Send the checkbox state
+      }),
     });
 
     const data = await response.json();
@@ -26,11 +31,16 @@ document.getElementById("translate-btn").addEventListener("click", async () => {
             ? `<br><strong>Base Form:</strong> ${item.lemma}`
             : "";
 
+        // Handle extended definitions (which might contain newlines)
+        const definition = extendedBreakdown
+          ? item.definition.replace(/\n/g, "<br>")
+          : item.definition;
+
         return `
                 <div class="breakdown-item">
                     <strong>Word:</strong> ${item.token}${displayLemma}<br>
                     <strong>Type:</strong> ${item.pos}<br>
-                    <strong>Definition:</strong> ${item.definition}<br><br>
+                    <strong>Definition:</strong> ${definition}<br><br>
                 </div>
             `;
       })
@@ -53,8 +63,17 @@ document.addEventListener("DOMContentLoaded", function () {
     "昨日は雨が降りました。",
     "東京に行きたいです。",
     "猫が好きです。",
-    "すみません、英語を話せますか？",
+    "英語を話せますか？",
   ];
+
+  document
+    .getElementById("breakdown-type")
+    .addEventListener("change", function () {
+      const inputText = document.getElementById("input-text").value;
+      if (inputText) {
+        document.getElementById("translate-btn").click();
+      }
+    });
 
   tryMeBtn.addEventListener("click", function () {
     const randomPhrase =
