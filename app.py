@@ -51,6 +51,7 @@ custom_definitions = {
     "だ": "copula (to be)",
     "いる": "to exist (animate); to have",
     "ある": "to exist (inanimate); to have",
+    "昨日": "Yesterday"
 }
 
 
