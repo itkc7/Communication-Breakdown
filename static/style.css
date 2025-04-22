@@ -31,7 +31,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-top: 86px;
+  margin-top: 97px;
   min-width: 0;
   height: 100%;
 }
@@ -85,7 +85,6 @@ button:hover {
   display: flex;
   align-items: center;
   gap: 15px;
-  /* margin-bottom: 10px; */
 }
 
 #breakdown-type {
@@ -144,4 +143,10 @@ button:hover {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+#description {
+  margin: -10px;
+  margin-left: 2px;
+  font-weight: 300;
 }
