@@ -74,7 +74,7 @@ button {
 }
 
 #translate-btn {
-  width: 100px;
+  width: 120px;
 }
 
 button:hover {
@@ -98,14 +98,12 @@ button:hover {
   margin-left: 10px;
 }
 
-/* Tooltip container */
 .tooltip {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
 
-/* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 200px;
@@ -115,19 +113,16 @@ button:hover {
   padding: 5px;
   border-radius: 6px;
   
-  /* Position the tooltip text */
   position: absolute;
   z-index: 1;
   bottom: 125%;
   left: 50%;
   margin-left: -100px;
   
-  /* Fade in tooltip */
   opacity: 0;
   transition: opacity 0.3s;
 }
 
-/* Tooltip arrow */
 .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
@@ -139,7 +134,6 @@ button:hover {
   border-color: #555 transparent transparent transparent;
 }
 
-/* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
@@ -149,4 +143,9 @@ button:hover {
   margin: -10px;
   margin-left: 2px;
   font-weight: 300;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

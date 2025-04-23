@@ -1,7 +1,18 @@
 document.getElementById("translate-btn").addEventListener("click", async () => {
+  const translateBtn = document.getElementById("translate-btn");
+  const tryMeBtn = document.getElementById("try-me-btn");
+
+  translateBtn.disabled = true;
+  tryMeBtn.disabled = true;
+
+  translateBtn.textContent = "Loading...";
+
   const inputText = document.getElementById("input-text").value;
   if (!inputText) {
     alert("Please enter some text.");
+    translateBtn.disabled = false;
+    tryMeBtn.disabled = false;
+    translateBtn.textContent = "Translate";
     return;
   }
 
@@ -15,7 +26,7 @@ document.getElementById("translate-btn").addEventListener("click", async () => {
       },
       body: JSON.stringify({
         sentence: inputText,
-        extended: extendedBreakdown, // Send the checkbox state
+        extended: extendedBreakdown,
       }),
     });
 
@@ -25,13 +36,11 @@ document.getElementById("translate-btn").addEventListener("click", async () => {
     const breakdownOutput = document.getElementById("breakdown-output");
     breakdownOutput.innerHTML = data.breakdown
       .map((item) => {
-        // Check if token and lemma are the same
         const displayLemma =
           item.token !== item.lemma
             ? `<br><strong>Base Form:</strong> ${item.lemma}`
             : "";
 
-        // Handle extended definitions (which might contain newlines)
         const definition = extendedBreakdown
           ? item.definition.replace(/\n/g, "<br>")
           : item.definition;
@@ -46,13 +55,17 @@ document.getElementById("translate-btn").addEventListener("click", async () => {
       })
       .join("");
 
-    // Scroll to the top of the page after translation
     window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (error) {
     console.error("Error:", error);
     alert("An error occurred while translating.");
+  } finally {
+    translateBtn.disabled = false;
+    tryMeBtn.disabled = false;
+    translateBtn.textContent = "Translate";
   }
 });
+
 document.addEventListener("DOMContentLoaded", function () {
   const tryMeBtn = document.getElementById("try-me-btn");
   const inputText = document.getElementById("input-text");
