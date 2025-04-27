@@ -80,23 +80,20 @@ def get_english_definition_extended(lemma, pos):
         if not result or not result.data:
             return "No definition found"
 
-        # Build detailed output similar to terminal display
         definitions = []
         for entry in result.data:
-            # Add word and reading
             word_info = f"{entry.slug} ({', '.join(entry.japanese[0].reading)})"
             if entry.jlpt:
                 word_info += f" [JLPT: {entry.jlpt[0]}]"
             definitions.append(word_info)
 
-            # Add all senses
             for i, sense in enumerate(entry.senses, 1):
                 sense_def = f"{i}. {', '.join(sense.english_definitions)}"
                 if sense.parts_of_speech:
                     sense_def += f" ({', '.join(sense.parts_of_speech)})"
                 definitions.append(sense_def)
 
-            definitions.append("─" * 80)  # Separator line
+            definitions.append("─" * 80)  
 
         return "\n".join(definitions)
 
@@ -105,14 +102,10 @@ def get_english_definition_extended(lemma, pos):
             print(f"Error fetching definition for {lemma}: {e}")
         return "No definition found"
 
-# Function to check if a character is hiragana
-
-
 def is_hiragana(char):
     return "HIRAGANA" in unicodedata.name(char, "")
 
 
-# Function to convert kanji to hiragana using pykakasi
 def kanji_to_hiragana(text):
     if all(is_hiragana(char) for char in text):
         return None
@@ -120,7 +113,6 @@ def kanji_to_hiragana(text):
     hiragana = "".join([item["hira"] for item in result])
     return hiragana
 
-# Route for the home page
 
 
 @app.route('/')
@@ -128,12 +120,11 @@ def home():
     return render_template('index.html')
 
 
-# Route to handle translation and linguistic breakdown
 @app.route('/translate', methods=['POST'])
 def translate():
     data = request.json
     sentence = data.get('sentence', '')
-    # Get the extended flag from request
+
     extended = data.get('extended', False)
 
     # Translate the sentence using DeepLX API PRO ENDPOINT
@@ -156,23 +147,18 @@ def translate():
         response = httpx.post(url=deeplx_api, data=post_data)
         response_json = response.json()
 
-        # Print the response for debugging
         print("DeepLX API Response:", response_json)
 
-        # Check if the response contains the expected key
         if "translations" in response_json:
             translation_text = response_json["translations"][0]["text"]
         else:
-            # Handle unexpected response structure
             print("Unexpected response structure:", response_json)
             translation_text = "Translation failed: Unexpected response from API."
 
     except Exception as e:
-        # Handle any exceptions that occur during the API request
         print(f"Error during translation: {e}")
         translation_text = "Translation failed: Please yell at me to fix container."
 
-    # Process the sentence for linguistic breakdown
     doc = nlp(sentence)
     breakdown = []
     for token in doc:
