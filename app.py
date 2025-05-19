@@ -8,9 +8,12 @@ import json
 
 app = Flask(__name__)
 
-deeplx_api = "https://monarch-immortal-ram.ngrok-free.app/v2/translate"  # pro endpoint + hosted
+# deeplx_api = "https://monarch-immortal-ram.ngrok-free.app/v2/translate"  # pro endpoint + hosted
 
-# deeplx_api = "http://127.0.0.1:1188/v2/translate"  # pro endpoint + local
+# deeplx_api = "https://deeplx-latest-0h4h.onrender.com/v2/translate"
+
+
+deeplx_api = "http://127.0.0.1:1188/v2/translate"  # pro endpoint + local
 
 
 # deeplx_api = "http://127.0.0.1:1188/translate"  # mobile endpoint
